@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dankcoderbot"
+version = "0.1.0"
+description = "This is DankCoder - a bot, born to spread dankness in our discord server"
+authors = ["JeS24"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+discord = "^1.0.1"
+flask = "^1.1.2"
+praw = "^7.1.4"
+replit = "^2.0.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

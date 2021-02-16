@@ -1,2 +1,7 @@
+# Secret stuff
 .env
 praw.ini
+
+# Installation stuff
+__pycache__/
+poetry.lock
