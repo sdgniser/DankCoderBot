@@ -23,6 +23,7 @@ dank_texts = [
     "WHO SUMMONED ME?",
     "Ahh, you think dankness is your ally? You merely adopted the dank. I was born in it. Molded by it.",
 ]
+hello_aliases = ["helloThere", "nuqneH", "aiya", "kaltxi", "bello"]
 # RECURSION_THRESHOLD = 1  # Will crash the bot
 SPOOKINESS_THRESHOLD = 0.1
 DANKNESS_THRESHOLD = 0.2
@@ -82,6 +83,7 @@ def get_meme():
 
     return urls[0]
 
+
 @bot.event
 async def on_ready():
     print(f"{bot.user.name} is ready to spread dankness now.")
@@ -91,24 +93,33 @@ async def on_ready():
 async def help(ctx):
     file = discord.File('./master.png')
     embed = discord.Embed(
-        title="Help for DankCoder",
-        description="List of commands for DankCoder",
+        title="List of commands for DankCoder",
+        description="This is DankCoder - a bot, born to spread dankness in this discord server.\n\n**Bot Pefix**: `def`\n\n**List of Commands:**",
         colour=discord.Colour.blurple(),
     )
-    embed.set_thumbnail(url="attachment://master.png")
-    embed.set_image(url="attachment://master.png")
-    embed.add_field(name="def help", value="Shows help message and list of commands", inline=False)
-    embed.add_field(name="def hello", value="Says hello", inline=False)
-    embed.add_field(name="def meme", value="Shares a meme from r/ProgrammerHumor", inline=False)
+    # embed.set_thumbnail(url="attachment://master.png")  # Message formatting breaks
+
+    embed.add_field(name="`def help`", value="Shows help message and list of commands", inline=True)
+    embed.add_field(name="aliases", value="None", inline=True)
+    embed.add_field(name="\u200b", value="\u200b", inline=True)
+    embed.add_field(name="`def hello`", value="Says hello", inline=True)
+    embed.add_field(name="aliases", value=f"{', '.join(j for j in ['`def ' + i + '`' for i in hello_aliases])}", inline=True)
+    embed.add_field(name="\u200b", value="\u200b", inline=True)
+    embed.add_field(name="`def meme`", value="Shares a meme from r/ProgrammerHumor", inline=True)
+    embed.add_field(name="aliases", value="`def mm`, `def maymay`", inline=True)
+    embed.add_field(name="\u200b", value="\u200b", inline=True)
+
+    embed.set_footer(text="Custom Meme Bot for NISER Coding Club Discord | Fork us on GitHub (https://github.com/sdgniser/DankCoderBot)", icon_url="attachment://master.png")
+
     await ctx.channel.send(content=None, file=file, embed=embed)
 
 
-@bot.command(name="hello", help="Says hello")
+@bot.command(name="hello", help="Says hello", aliases=hello_aliases)
 async def hello(ctx):
     await ctx.channel.send("Hello there!")
 
 
-@bot.command(name="meme", help="Shares a meme from r/ProgrammerHumor")
+@bot.command(name="meme", help="Shares a meme from r/ProgrammerHumor", aliases=["maymay", "mm"])
 async def meme(ctx):
     await ctx.channel.send(get_meme())
 
